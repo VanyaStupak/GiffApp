@@ -19,7 +19,7 @@ class GifViewModel(private val gifApi: GifApi) : ViewModel() {
         loadGifData()
     }
 
-     fun loadGifData() {
+    fun loadGifData() {
         viewModelScope.launch {
             try {
                 val gifs = gifApi.getTrendGifs()
@@ -47,6 +47,5 @@ class GifViewModel(private val gifApi: GifApi) : ViewModel() {
             }
         }
     }
-
 
 }

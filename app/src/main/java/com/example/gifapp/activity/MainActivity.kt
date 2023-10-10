@@ -3,15 +3,15 @@ package com.example.gifapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.gifapp.viewModel.GifViewModelFactory
 import com.example.gifapp.R
 import com.example.gifapp.data.GifApi
 import com.example.gifapp.viewModel.GifViewModel
 import com.example.gifapp.adapter.GifAdapter
-
 import com.example.gifapp.databinding.ActivityMainBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
             .build()
         val gifApi = retrofit.create(GifApi::class.java)
 
-        viewModel = GifViewModel(gifApi)
+        viewModel =
+            ViewModelProvider(this, GifViewModelFactory(gifApi)).get(GifViewModel::class.java)
 
         binding.rcView.adapter = adapter
         binding.rcView.layoutManager = GridLayoutManager(this, 2)
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.inflateMenu(R.menu.menu_main)
         val searchItem = binding.toolbar.menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+
+
 
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -74,5 +77,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.action_clear_cache -> {
+//                Log.d("MyLog",
+//                    "button clicked"
+//                )
+//                CoroutineScope(Dispatchers.IO).launch{
+//                    Glide.get(applicationContext).clearDiskCache()
+//                }
+//                Glide.get(applicationContext).clearMemory()
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 }

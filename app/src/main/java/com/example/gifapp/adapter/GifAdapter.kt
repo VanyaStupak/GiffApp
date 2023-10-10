@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.gifapp.activity.FullScreenGifActivity
 import com.example.gifapp.data.GifItem
 import com.example.gifapp.databinding.ItemGifBinding
@@ -18,7 +19,6 @@ class GifAdapter : RecyclerView.Adapter<GifAdapter.GifViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(gif: GifItem) {
             Glide.with(binding.root.context)
-                .asGif()
                 .load(gif.images.original.url)
                 .into(binding.gifImageView)
             binding.title.text = gif.title
