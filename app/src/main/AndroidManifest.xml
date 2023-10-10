@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GIFApp"
         tools:targetApi="33">
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

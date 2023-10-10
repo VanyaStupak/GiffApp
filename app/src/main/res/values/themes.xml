@@ -1,7 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GIFApp" parent="Theme.Material3.DayNight">
-    </style>
+    <style name="Base.Theme.GIFApp" parent="Theme.Material3.DayNight.NoActionBar">
 
+        <item name="windowActionBar">true</item>
+
+    </style>
+    <style name="MyToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/white</item>
+        <item name="titleTextColor">@color/black</item>
+    </style>
     <style name="Theme.GIFApp" parent="Base.Theme.GIFApp" />
 </resources>

@@ -19,10 +19,28 @@ class GifViewModel(private val gifApi: GifApi) : ViewModel() {
         loadGifData()
     }
 
-    private fun loadGifData() {
+     fun loadGifData() {
         viewModelScope.launch {
             try {
                 val gifs = gifApi.getTrendGifs()
+                _gifList.postValue(gifs.data)
+            } catch (e: Exception) {
+                _errorToast.postValue("Помилка завантаження GIF\n Перевірте підключення до інтернету")
+            }
+        }
+    }
+
+    fun searchGifs(query: String) {
+        viewModelScope.launch {
+            try {
+                val gifs = gifApi.searchGifs(
+                    query = query,
+                    limit = 50,
+                    offset = 0,
+                    rating = "g",
+                    lang = "en",
+                    bundle = "messaging_non_clips"
+                )
                 _gifList.postValue(gifs.data)
             } catch (e: Exception) {
                 _errorToast.postValue("Помилка завантаження GIF\n Перевірте підключення до інтернету")
